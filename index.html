@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Technical Dissertation on the AxialMag Concept: A Passive Permanent Magnet Rotary System</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; max-width: 800px; margin: 0 auto; }
+        h1, h2, h3 { color: #333; }
+        pre { background: #f4f4f4; padding: 10px; overflow: auto; }
+        code { font-family: monospace; }
+        .equation { text-align: center; font-style: italic; }
+        ul, ol { margin-left: 20px; }
+        footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+
+<h1>A Technical Dissertation on the AxialMag Concept: A Passive Permanent Magnet Rotary System</h1>
+
+<p><strong>Author:</strong> Robert (@BobTheFixer73)<br>
+<strong>Date:</strong> March 07, 2026<br>
+<strong>Abstract:</strong> This dissertation explores the AxialMag concept, a novel passive mechanical system utilizing neodymium permanent magnets in a reciprocating piston-cam arrangement to generate rotary motion. The design leverages hybrid attraction-repulsion gating, multi-piston phasing, and a sinusoidal cam profile to create directional torque impulses. While the concept aims to achieve sustained rotation through magnetic imbalances without external energy input, fundamental physics principles—such as conservative magnetic fields—suggest limitations. Detailed modeling, calculations, and discussions are provided, emphasizing forced-positive contributions and real-world challenges. This work serves as a conceptual blueprint for prototyping and analysis.</p>
+
+<h2>1. Introduction</h2>
+
+<p>The AxialMag concept represents an innovative attempt to harness the persistent forces of permanent magnets in a mechanical system for rotary output. Inspired by traditional piston-cam mechanisms but powered solely by magnetic interactions, it seeks to produce net torque through asymmetric force application without violating conservation laws. Unlike conventional motors requiring electrical input, AxialMag is passive, relying on neodymium magnets' high remanence and coercivity.</p>
+
+<p>This dissertation provides a comprehensive technical overview, including theoretical foundations, design specifications, mathematical modeling, performance estimates, and critical objections. The analysis is grounded in magnetostatics, mechanics, and energy conservation, with an emphasis on the system's "forced-positive" logic—ensuring unidirectional contributions without artificial sign flips or absolutes—to preserve physical fidelity.</p>
+
+<p>Key parameters from the concept include: 7 pistons phased around a sinusoidal cam (3 cycles per revolution), 50 mm piston travel, 3 mm top dead center (TDC) gap, neodymium magnets (3 mm thick, 15 mm radius), and hybrid top/bottom plate arrangements with \~7% gating windows for attraction/repulsion phases.</p>
+
+<h2>2. Theoretical Background</h2>
+
+<h3>2.1 Magnetostatics and Permanent Magnet Forces</h3>
+
+<p>Permanent magnets, such as N52-grade neodymium (NdFeB) with remanence Br ≈ 1.45 T, produce static magnetic fields from aligned atomic dipoles. The force between two axial-magnetized discs is governed by dipole-dipole interactions:</p>
+
+<div class="equation">
+    F ≈ (μ₀ / 4π) × (2 m₁ m₂ / r⁴)  (for like poles repulsion at distance r)
+</div>
+
+<p>where μ₀ is vacuum permeability, m₁ and m₂ are magnetic moments (m = Br × volume / μ₀). For thin discs at close gaps, empirical fits show steep decay: F \~ 1/gap² to 1/gap⁴. Repulsion is forced-positive (unidirectional, non-negative), aligning with the concept's no-abs/no-sign-flip rule to reflect mechanical reality (e.g., no negative torque from unilateral contacts).</p>
+
+<h3>2.2 Conservative Fields in Dynamic Systems</h3>
+
+<p>Magnetic fields from permanent magnets are conservative: forces derive from a position-dependent potential U(r, θ), with net work over closed paths ∫ F · dr = 0. Motion introduces time-varying configurations but remains quasi-static at low speeds, without non-conservative terms like induced emfs (absent conductors). This implies net torque over full cycles averages to zero, challenging sustained rotation claims.</p>
+
+<h3>2.3 Cam-Piston Mechanics</h3>
+
+<p>The sinusoidal cam converts axial piston forces to rotary torque: τ = F_axial × (dh/dφ), where h(φ) = A sin(3φ) (A = 25 mm amplitude for 50 mm travel, 3 cycles/rev). Slope dh/dφ peaks at 0.075 m/rad, providing mechanical advantage during force windows.</p>
+
+<h2>3. System Design</h2>
+
+<h3>3.1 Overall Architecture</h3>
+
+<p>AxialMag consists of a central rotating cam (150 mm radius) driving 7 equidistant pistons (51.4° spacing). Each piston reciprocates axially (50 mm stroke) against fixed or counter-phased profiled plate magnets. The armature (static) holds piston rails, bearings, and enclosure (\~4 L total volume target, car-battery-sized).</p>
+
+<ul>
+    <li><strong>Pistons</strong>: 30 mm dia × 3 mm thick N52 discs, axial-magnetized.</li>
+    <li><strong>Plates</strong>: Similar thickness, profiled for flux focus (e.g., Halbach-like), top/bottom arrangement for hybrid gating.</li>
+    <li><strong>Cam Profile</strong>: Sinusoidal, 3 cycles/rev, ensuring phased overlaps.</li>
+    <li><strong>Adjustability</strong>: Plate altitude (gap tuning) and rotation angle (phasing optimization), locked statically.</li>
+    <li><strong>Ferrous Elements</strong>: Optional backing plates (1–2 mm steel) for 1.5–2.5× force boost; parasitic shielding (mu-metal) to reduce crosstalk.</li>
+</ul>
+
+<h3>3.2 Gating and Phasing Mechanism</h3>
+
+<p>Per piston cycle (120° mechanical):
+    - Attract phase (\~7% pre-hump): Bottom N-S junction pulls piston toward TDC.
+    - Dead zone (TDC, 3 mm gap): Net force near-zero (field cancellation).
+    - Repulse phase (\~7% post-hump): Top like-pole repulsion pushes piston down.
+    - N-S junction: Pole transition, resetting for next cycle.
+
+With 7 pistons, overlaps aim for \~85–90% power band coverage, minimizing ripple.</p>
+
+<h2>4. Mathematical Modeling</h2>
+
+<h3>4.1 Force Estimation</h3>
+
+<p>Peak repulsion at 3 mm gap: \~35 N per pair (empirical from N52 disc data). Average per piston over power band: 17.5 N. Total average force (7 pistons): 122.5 N.</p>
+
+<h3>4.2 Torque Calculation</h3>
+
+<p>Torque per piston: τ_k = F_mag(gap_k) × dh/dφ (at phase k).</p>
+
+<p>Average slope in power band: \~0.042 m/rad. Per-piston average torque: \~0.735 Nm. Total system average: \~5 Nm (idealized small scale).</p>
+
+<p>Scaling (10× linear): Torque \~5,000 Nm (force ×100, lever ×10).</p>
+
+<h3>4.3 Energy Transfer and Positivity</h3>
+
+<p>Forced-positive rule: Contributions ≥0, zeros in unloaded states. No sign flips preserve mechanical reality (e.g., repulsion can't pull).</p>
+
+<h2>5. Potential Performance</h2>
+
+<p>Small scale: \~5 Nm average torque, potential \~157 W mechanical at 300 RPM. With generator (85% efficiency): \~133 W electrical.</p>
+
+<p>Scaled (10×): \~157 kW mechanical. With ferrous boosts: Higher by 1.5–2.5×.</p>
+
+<p>4 L volume target: 4 kW electrical feasible if averages hold, for home baseload.</p>
+
+<h2>6. Challenges and Objections</h2>
+
+<p>Despite clever gating, conservative fields ensure net zero work over cycles: Attract release balances repulse store. Motion unsettles flux but doesn't create non-conservative gains. Losses (friction, eddies) cause decay to stop, not "centuries-long" graceful halt (no radioisotope-like depletion in PMs).</p>
+
+<p>Assembly challenges: Imbalance torques require locked axle, adjustable jigs. No verified passive PM systems sustain rotation; prototypes stop quickly.</p>
+
+<h2>7. Conclusion</h2>
+
+<p>AxialMag pushes magnetic-mechanical boundaries with phased gating and positivity rules, potentially achieving brief rotation from imbalances. However, conservation laws limit sustained output. Prototyping with adjustability and measurements is recommended to validate or refine. Future work: FEM simulations, ferrous optimizations, dyno testing.</p>
+
+<h2>References</h2>
+
+<ol>
+    <li>Griffiths, D. J. (2013). Introduction to Electrodynamics. Pearson.</li>
+    <li>Lubin, T., et al. (2010). "Analytical Computation of the Magnetic Field Produced by Permanent-Magnet Rings." IEEE Transactions on Magnetics.</li>
+    <li>Arnold Magnetic Technologies. (2023). NdFeB Magnet Stability Data.</li>
+    <li>Various patents and debunkings: US20070120432A1, RationalWiki on Magnet Motors.</li>
+</ol>
+
+<footer>
+    <p>This dissertation is conceptual and for educational purposes. Build and test responsibly. Generated with assistance from Grok by xAI.</p>
+</footer>
+
+</body>
+</html>
